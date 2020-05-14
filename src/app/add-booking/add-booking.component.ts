@@ -3,6 +3,7 @@ import { Show } from '../model/show';
 import { Movie } from '../model/movie';
 import { Theater } from '../model/theater';
 import { Screen } from '../model/screen';
+import { Booking } from '../model/booking';
 
 @Component({
   selector: 'app-add-booking',
@@ -10,12 +11,21 @@ import { Screen } from '../model/screen';
   styleUrls: ['./add-booking.component.css']
 })
 export class AddBookingComponent implements OnInit {
+
+  booking:Booking=null;
+  seatShown=false;
+  showbooking=false;
   cityList=["Delhi","Mumbai","Banglore","Chennai"];
   showList:Array<Show>=[];
   screenList:Array<Screen>=[];
-  selectedTheaterList:Array<Theater>=[];
   movieList:Array<Movie>=[];
   theaterList:Array<Theater>=[];
+  seatIds:Array<number>=[];
+
+  selectedTheaterList:Array<Theater>=[];
+  selectedMovieList:Array<Movie>=[];
+  selectedScreenList:Array<Screen>=[];
+  selectedShowList:Array<Show>=[];
 
   constructor() { 
     let show1=new Show(87,new Date(),new Date(),[42,58,67],"Morning","F&F");
@@ -61,11 +71,56 @@ export class AddBookingComponent implements OnInit {
   getTheater(event:any){
     this.selectedTheaterList=[];
     let city=event.target.value;
-    console.log(city);
     this.theaterList.forEach(theater=>{
         if(theater.theaterCity===city){
           this.selectedTheaterList.push(theater);
         }
     });
+  }
+  
+  getMovieAndScreen(event:any){
+    this.selectedMovieList=[];
+    this.selectedScreenList=[];
+    let theaterId=event.target.value;
+    this.screenList.forEach(screen =>{
+      if(screen.theaterId==theaterId){
+        this.selectedScreenList.push(screen);
+      }
+    });
+  }
+
+  getShow(event:any){
+    this.selectedShowList=[];
+    let movieId=event.target.value;
+    let movieName="";
+    this.movieList.forEach(movie =>{
+      if(movie.movieId==movieId){
+        movieName=movie.movieName;
+      }
+    });
+    this.showList.forEach(show =>{
+      if(show.movieName==movieName){
+        this.selectedShowList.push(show);
+      }
+    });
+  }
+
+  getSeats(event:any){
+    this.seatIds=[];
+    let showId=event.target.value;
+    this.selectedShowList.forEach(show =>{
+      if(showId==show.showId){
+        this.seatIds=show.seatIds;
+      }
+    });
+    this.seatShown=true;
+  }
+
+  submit(bookingForm:any){
+    let bookingDetails= bookingForm.value;
+    console.log(bookingDetails.seats);
+    this.booking=new Booking(bookingDetails.movie,bookingDetails.show,bookingDetails.screen,
+      bookingDetails.paymentMethod,bookingDetails.seats);
+      this.showbooking=true;
   }
 }
