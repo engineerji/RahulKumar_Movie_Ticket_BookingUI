@@ -1,0 +1,59 @@
+<h1 style="margin-left: 40%;">Movie Ticket Booking</h1>
+<div class="container">
+    <form #bookingForm="ngForm">
+        <div class="form-group">
+            <label class="form-group-label">City</label>
+            <select class="custom-select" (change)="getTheater($event)">
+                <option selected>Choose City</option>
+                <option *ngFor="let city of cityList">{{city}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-group-label">Theater</label>
+            <select class="custom-select">
+                <option selected>Choose Theater</option>
+                <option *ngFor="let theater of selectedTheaterList">{{theater.theaterName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-group-label">Movie</label>
+            <select class="custom-select">
+                <option selected>Choose Movie</option>
+                <option *ngFor="let movie of movieList">{{movie.movieName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-group-label">Screen</label>
+            <select class="custom-select">
+                <option selected>Choose Screen</option>
+                <option *ngFor="let screen of screenList">{{screen.screenName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-group-label">Show</label>
+            <select class="custom-select">
+                <option selected>Choose Show</option>
+                <option *ngFor="let show of showList">{{show.showName}}</option>
+            </select>
+        </div>
+        <div>
+            <label>Payment Method</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" value="Cash">
+                <label class="form-check-label">Cash</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="paymentMethod" value="Online">
+                <label class="form-check-label">Online</label>
+            </div>
+        </div>
+        <!-- <div>
+            <label>Available Seats</label>
+            <div class="form-check" *ngFor="let seat of seats">
+                <input class="form-check-input" type="checkbox" name="seats" value="{{seat.seatId}}">
+                <label class="form-check-label">{{seat.seatId}}</label>
+            </div>
+        </div> -->
+        <button class="btn btn-primary">Book Ticket</button>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+<h1 style="margin-left: 42%;">Find Booking</h1>
+<div class="container">
+    <form #searchBooking="ngForm">
+        <div class="form-group">
+            <label>Booking Id</label>
+            <input type="text" #bookingId="ngModel" class="form-control" pattern="^\d+$" name="bookingId" placeholder="Enter the Booking Id" required maxlength="4" ngModel>
+        </div>
+        <div *ngIf="bookingId.invalid && (bookingId.dirty || bookingId.touched)" class="alert alert-danger">
+            <div *ngIf="bookingId.invalid == true">
+                <div *ngIf="bookingId.errors.required">
+                    Booking Id is required.
+                </div>
+
+                <div *ngIf="bookingId.errors.pattern">
+                    Booking Id should be numeric.
+                </div>
+            </div>
+            
+        </div>
+       <button [disabled]="searchBooking.form.invalid" class="btn btn-primary" type="submit" (click)="getBooking(bookingId.value)">Search</button>
+    </form>
+</div>
+<div class="container" *ngIf="show">
+    <h2 style="margin-left: 40%;"> Booking Details</h2>
+    <table class="table">
+        <tr>
+            <th scope="row">Booking Id</th><td>{{booking.bookingId}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Movie Id</th><td>{{booking.movieId}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Show Id</th><td>{{booking.showId}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Booking Date</th><td>{{booking.bookingDate}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Transaction Id</th><td>{{booking.transactionId}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Total Cost</th><td>{{booking.totalCost}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Seats</th><td>{{booking.seatIds}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Ticket Id</th><td>{{booking.ticket.ticketId}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,39 @@
+<h1 style="margin-left: 42%;">Find Ticket</h1>
+<div class="container">
+    <form #searchTicket="ngForm">
+        <div class="form-group">
+            <label>Booking Id</label>
+            <input type="text" #bookingId="ngModel" class="form-control" pattern="^\d+$" name="bookingId" placeholder="Enter the Booking Id" required maxlength="4" ngModel>
+        </div>
+        <div *ngIf="bookingId.invalid && (bookingId.dirty || bookingId.touched)" class="alert alert-danger">
+            <div *ngIf="bookingId.invalid == true">
+                <div *ngIf="bookingId.errors.required">
+                    Booking Id is required.
+                </div>
+
+                <div *ngIf="bookingId.errors.pattern">
+                    Booking Id should be numeric.
+                </div>
+            </div>
+            
+        </div>
+       <button [disabled]="searchTicket.form.invalid" class="btn btn-primary" type="submit" (click)="getBooking(bookingId.value)">Search</button>
+    </form>
+</div>
+<div class="container" *ngIf="show">
+    <h2 style="margin-left: 40%;"> Ticket Details</h2>
+    <table class="table">
+        <tr>
+            <th scope="row">Ticket Id</th><td>{{ticket.ticketId}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Number Of Seats</th><td>{{ticket.noOfSeats}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Seats</th><td>{{ticket.seatIds}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Screen Name</th><td>{{ticket.screenName}}</td>
+        </tr>
+    </table>
+</div>

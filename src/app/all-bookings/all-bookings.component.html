@@ -1,0 +1,34 @@
+<h2 style="margin-left: 40%;">Booking Details</h2>
+<div class="alldata">
+    <div class="container">
+        <table class="table" >
+            <thead class="thead-dark">
+                <tr>
+                    <th>Booking Id</th>
+                    <th>Movie Id</th>
+                    <th>Show Id</th>
+                    <th>Booking Date</th>
+                    <th>Transaction Id</th>
+                    <th>Total Cost</th>
+                    <th>Seats</th>
+                    <th>Ticket Id</th>
+                </tr>
+        
+            </thead>
+            <tbody *ngFor="let booking of bookings">
+                <tr>
+                    <th scope="row">{{booking.bookingId}}</th>
+                    <td>{{booking.movieId}}</td>
+                    <td>{{booking.showId}}</td>
+                    <td>{{booking.bookingDate}}</td>
+                    <td>{{booking.transactionId}}</td>
+                    <td>{{booking.totalCost}}</td>
+                    <td>{{booking.seatIds}}</td>
+                    <td>{{booking.ticket.ticketId}}</td>
+                 </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+</div>
